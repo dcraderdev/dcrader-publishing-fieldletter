@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import IssueCard from '../../components/IssueCard.astro';
+import SubscribeBlock from '../../components/SubscribeBlock.astro';
+import { issuesByDate } from '../../data/issues';
+import { site } from '../../data/site';
+
+// Group by year for the dense list view.
+const byYear = new Map<string, typeof issuesByDate>();
+for (const issue of issuesByDate) {
+  const year = issue.date.slice(0, 4);
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(issue);
+}
+const years = Array.from(byYear.keys());
+---
+<Base title="Archive" description={`Every issue of ${site.name} since 2025.`} active="archive">
+  <section class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14">
+    <header class="max-w-essay">
+      <p class="font-sans text-xs uppercase tracking-[0.32em] text-ink-500">The archive</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl text-ink-900 tracking-tight">
+        Every issue, in order.
+      </h1>
+      <p class="mt-4 font-serif text-lg text-ink-700">
+        Field Letter has been published every Sunday morning since {site.author} sent the first one,
+        from a kitchen table in Cleveland, to a list of forty-one readers in early 2021. Most of these
+        essays sit somewhere between climate, cities, and a healthy skepticism about the technology we
+        keep installing in the middle of our days.
+      </p>
+    </header>
+  </section>
+
+  <section class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 mt-14">
+    <h2 class="sr-only">Featured recent issues</h2>
+    <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {issuesByDate.slice(0, 3).map((issue) => (
+        <IssueCard issue={issue} />
+      ))}
+    </div>
+  </section>
+
+  <hr class="max-w-wide mx-auto border-ink-900/10 my-16" />
+
+  <section class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="font-display text-2xl sm:text-3xl text-ink-900 mb-2">Every issue</h2>
+    <p class="font-sans text-sm text-ink-500 mb-10">
+      {issuesByDate.length} essays. Newest first.
+    </p>
+
+    {years.map((year) => (
+      <div class="mb-12">
+        <h3 class="font-sans text-xs uppercase tracking-[0.24em] text-ink-500 border-b border-ink-900/10 pb-2 mb-4">
+          {year}
+        </h3>
+        <ul class="divide-y divide-ink-900/10">
+          {byYear.get(year)!.map((issue) => (
+            <li>
+              <a
+                href={`/issues/${issue.slug}/`}
+                class="grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 sm:gap-x-6 py-4 group"
+              >
+                <span class="font-sans text-xs sm:text-sm text-ink-500 tabular-nums w-24 sm:w-28">
+                  <time datetime={issue.date}>{issue.displayDate}</time>
+                </span>
+                <span>
+                  <span class="font-display text-lg sm:text-xl text-ink-900 group-hover:text-accent-700 transition-colors">
+                    {issue.title}
+                  </span>
+                  <span class="block mt-1 font-serif text-sm text-ink-700 leading-snug">
+                    {issue.dek}
+                  </span>
+                </span>
+                <span class="font-sans text-xs text-ink-500 hidden sm:inline">
+                  {issue.section}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="max-w-essay mx-auto px-4 sm:px-6 mt-16">
+    <SubscribeBlock variant="hero" heading="Get the next one in your inbox." />
+  </section>
+</Base>

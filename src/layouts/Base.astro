@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import TopHeader from '../components/TopHeader.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  active?: 'home' | 'archive' | 'about';
+  /** When true, render the larger masthead variant of SiteHeader. */
+  masthead?: boolean;
+  /** When set, the page will preload this URL string as the LCP candidate image. */
+  preloadImage?: string;
+}
+const {
+  title,
+  description = site.description,
+  ogImage = '/images/site/og-default.jpg',
+  active,
+  masthead = false,
+  preloadImage,
+} = Astro.props;
+
+const pageTitle = title === site.name
+  ? `${site.name} — ${site.tagline}`
+  : `${title} · ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://fieldletter.dcrader.dev').toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f7f4ed" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site ?? 'https://fieldletter.dcrader.dev').toString()} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
+  </head>
+  <body class="bg-paper-50 text-ink-900 min-h-screen flex flex-col">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <TopHeader active={active} />
+    <SiteHeader active={active} masthead={masthead} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

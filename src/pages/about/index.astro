@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import SubscribeBlock from '../../components/SubscribeBlock.astro';
+import { author, site } from '../../data/site';
+---
+<Base title="About the writer" description={`About ${author.name}, writer of ${site.name}.`} active="about">
+  <section class="max-w-essay mx-auto px-4 sm:px-6 pt-10 sm:pt-16">
+    <header>
+      <p class="font-sans text-xs uppercase tracking-[0.32em] text-ink-500">About the writer</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl text-ink-900 tracking-tight">
+        {author.name}
+      </h1>
+      <p class="mt-3 font-serif text-lg text-ink-700">
+        {author.title} — in {author.city}.
+      </p>
+    </header>
+
+    <div class="essay-prose mt-10">
+      {author.bio.map((p, i) => (
+        i === 0 ? <p class="lede">{p}</p> : <p>{p}</p>
+      ))}
+
+      <h2>What this newsletter is</h2>
+      <p>
+        Field Letter is one long essay every Sunday morning. The reading width is generous on purpose. The
+        typography is set in Source Serif 4 because it is what I read most comfortably on a phone, and
+        because the headlines look right in Playfair Display, which is older than every other element on
+        the page. I make no apology for any of this.
+      </p>
+      <p>
+        I do not run advertising, I do not run an affiliate program, and I do not work with sponsors. The
+        newsletter is free; reader support keeps the lights on. If you would like to support the work, the
+        best thing you can do is forward an issue you liked to one other person.
+      </p>
+
+      <h2>Selected work elsewhere</h2>
+      <ul>
+        {author.credits.map((credit) => (
+          <li>{credit}</li>
+        ))}
+      </ul>
+
+      <h2>Get in touch</h2>
+      <p>
+        I read every reply to the newsletter. The fastest way to reach me is to hit reply on any issue.
+        For accessibility issues with this site, write to
+        <a href={`mailto:${site.accessibilityEmail}`}>{site.accessibilityEmail}</a> and I will get back
+        to you within five business days.
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <SubscribeBlock variant="hero" />
+    </div>
+  </section>
+</Base>

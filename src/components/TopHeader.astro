@@ -1,0 +1,47 @@
+---
+// Slim top bar with portfolio backlink + inline section nav.
+// Always rendered inline (no client JS) so it is present on first paint.
+interface Props {
+  active?: 'home' | 'archive' | 'about';
+}
+const { active } = Astro.props;
+
+const navItems = [
+  { label: 'Current issue', href: '/', key: 'home' as const },
+  { label: 'Archive', href: '/archive/', key: 'archive' as const },
+  { label: 'About the writer', href: '/about/', key: 'about' as const },
+];
+---
+<div class="bg-ink-900 text-paper-50 text-xs sm:text-sm">
+  <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between gap-4">
+    <a
+      href="https://dcrader.dev"
+      class="font-sans inline-flex items-center gap-1.5 hover:text-paper-200 transition-colors"
+      aria-label="Back to Donovan Crader's portfolio at dcrader.dev"
+    >
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/>
+        <path d="m12 19-7-7 7-7"/>
+      </svg>
+      <span class="hidden sm:inline">dcrader.dev</span>
+    </a>
+    <nav aria-label="Section" class="font-sans">
+      <ul class="flex items-center gap-1 sm:gap-3">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'inline-block px-1.5 sm:px-2 py-1 rounded hover:text-paper-200',
+                active === item.key ? 'text-accent-100' : 'text-paper-50',
+              ]}
+              aria-current={active === item.key ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</div>

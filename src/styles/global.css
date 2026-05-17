@@ -1,0 +1,164 @@
+/* Source Serif 4 (body), Playfair Display (display), Inter (UI). */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper-50: #f7f4ed;
+  --ink-900: #161513;
+  --accent-700: #0d4f4a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--paper-50);
+  color: var(--ink-900);
+}
+
+body {
+  font-family: 'Source Serif 4', Charter, Georgia, 'Times New Roman', serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'kern', 'liga', 'onum';
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Charter, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.18;
+  color: var(--ink-900);
+}
+
+/* Accessible focus ring everywhere. */
+*:focus-visible {
+  outline: 2px solid var(--accent-700);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — visible on focus, hidden otherwise. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: var(--ink-900);
+  color: var(--paper-50);
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.25rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* Essay prose styles — applied with `.essay-prose` on the article body. */
+.essay-prose {
+  font-size: 1.125rem;     /* 18px */
+  line-height: 1.72;
+  color: #23201b;          /* ink-800 */
+}
+.essay-prose p {
+  margin: 0 0 1.25em;
+}
+.essay-prose p + p {
+  text-indent: 1.5em;
+}
+.essay-prose p.lede,
+.essay-prose .lede + p,
+.essay-prose h2 + p,
+.essay-prose h3 + p,
+.essay-prose blockquote + p {
+  text-indent: 0;
+}
+.essay-prose .lede {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: #161513;
+  margin-bottom: 1.5em;
+}
+.essay-prose h2 {
+  font-size: 1.6rem;
+  margin: 2.4em 0 0.7em;
+}
+.essay-prose h3 {
+  font-size: 1.2rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #3a352e;
+  margin: 2em 0 0.5em;
+}
+.essay-prose blockquote {
+  border-left: 3px solid var(--accent-700);
+  padding-left: 1.1rem;
+  margin: 1.6em 0;
+  font-style: italic;
+  color: #3a352e;
+}
+.essay-prose a {
+  color: var(--accent-700);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.essay-prose a:hover {
+  color: #0a3f3a;
+}
+.essay-prose .pullquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: #161513;
+  text-align: center;
+  margin: 2em auto;
+  max-width: 32rem;
+  padding: 1em 0;
+  border-top: 1px solid rgba(22, 21, 19, 0.18);
+  border-bottom: 1px solid rgba(22, 21, 19, 0.18);
+}
+.essay-prose hr.section {
+  border: 0;
+  height: 0;
+  margin: 2.4em auto;
+  text-align: center;
+  width: 100%;
+}
+.essay-prose hr.section::before {
+  content: '* * *';
+  letter-spacing: 0.5em;
+  color: #7a7368;
+  font-size: 0.95em;
+}
+.essay-prose .footnotes {
+  border-top: 1px solid rgba(22, 21, 19, 0.12);
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #3a352e;
+}
+.essay-prose .footnotes ol {
+  padding-left: 1.5rem;
+  list-style: decimal;
+}
+.essay-prose .footnotes li {
+  margin-bottom: 0.5em;
+}
+.essay-prose sup a {
+  text-decoration: none;
+  font-feature-settings: 'sups';
+}
+
+/* Print: hide chrome when printing issues. */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: white; color: black; }
+}

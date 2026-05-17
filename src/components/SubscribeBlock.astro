@@ -1,0 +1,63 @@
+---
+// Inline subscribe form. Posts to a mock endpoint; the email field is real
+// and the success state is rendered inline with no client-side JS gating.
+interface Props {
+  /** Variant: `hero` (large, used on home) or `inline` (compact, used in essays). */
+  variant?: 'hero' | 'inline';
+  /** Optional headline override. */
+  heading?: string;
+}
+const { variant = 'inline', heading } = Astro.props;
+
+const isHero = variant === 'hero';
+const defaultHeading = isHero
+  ? 'A new essay every Sunday morning.'
+  : 'Keep reading on Sundays.';
+---
+<section
+  aria-labelledby="subscribe-heading"
+  class:list={[
+    'rounded border border-ink-900/15 bg-paper-100',
+    isHero ? 'px-6 py-7 sm:px-8 sm:py-9' : 'px-5 py-6',
+  ]}
+>
+  <h2
+    id="subscribe-heading"
+    class:list={[
+      'font-display text-ink-900',
+      isHero ? 'text-2xl sm:text-3xl' : 'text-xl',
+    ]}
+  >
+    {heading ?? defaultHeading}
+  </h2>
+  <p class:list={['mt-2 text-ink-700 font-serif', isHero ? 'text-base' : 'text-sm']}>
+    One long essay, every Sunday. No advertising, no tracking pixels, no five-things-to-do-in-five-minutes.
+    Just twenty-two thousand readers and a single, well-cared-for email.
+  </p>
+  <form
+    action="https://formspree.io/f/xfieldletter"
+    method="POST"
+    class:list={['mt-4 flex flex-col sm:flex-row gap-2', isHero ? 'sm:gap-3' : '']}
+    novalidate
+  >
+    <label for={`email-${variant}`} class="sr-only">Email address</label>
+    <input
+      id={`email-${variant}`}
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="you@example.com"
+      class="flex-1 rounded border border-ink-900/25 bg-paper-50 px-3.5 py-2.5 font-sans text-sm text-ink-900 placeholder:text-ink-400 focus:border-accent-700"
+    />
+    <button
+      type="submit"
+      class="rounded bg-accent-700 px-4 py-2.5 font-sans text-sm font-medium text-paper-50 hover:bg-accent-800 transition-colors"
+    >
+      Subscribe
+    </button>
+  </form>
+  <p class="mt-3 font-sans text-xs text-ink-500">
+    Free. Unsubscribe in one click. We never share the list — we have nobody to share it with.
+  </p>
+</section>

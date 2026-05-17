@@ -1,0 +1,47 @@
+---
+import { Picture } from 'astro:assets';
+import type { Issue } from '../data/issues';
+
+interface Props {
+  issue: Issue;
+  /** Compact card (used in dense archive lists) vs. featured (taller cover). */
+  variant?: 'featured' | 'compact';
+}
+const { issue, variant = 'featured' } = Astro.props;
+
+const href = `/issues/${issue.slug}/`;
+---
+<article class:list={['group', variant === 'compact' ? '' : '']}>
+  <a href={href} class="block">
+    <div class:list={[
+      'overflow-hidden rounded border border-ink-900/10 bg-paper-100',
+      variant === 'compact' ? 'aspect-[16/9]' : 'aspect-[3/2]',
+    ]}>
+      <Picture
+        src={issue.cover}
+        alt={issue.coverAlt}
+        formats={['avif', 'webp']}
+        widths={[400, 800, 1200]}
+        sizes={variant === 'compact' ? '(min-width: 768px) 320px, 100vw' : '(min-width: 768px) 480px, 100vw'}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-full object-cover group-hover:scale-[1.015] transition-transform duration-500"
+      />
+    </div>
+  </a>
+  <div class="mt-3">
+    <p class="font-sans text-xs uppercase tracking-[0.18em] text-ink-500">
+      No. {issue.number} · {issue.section} · {issue.displayDate}
+    </p>
+    <h3 class:list={[
+      'mt-1 font-display text-ink-900',
+      variant === 'compact' ? 'text-lg' : 'text-2xl',
+    ]}>
+      <a href={href} class="hover:text-accent-700 transition-colors">{issue.title}</a>
+    </h3>
+    <p class="mt-1.5 font-serif text-ink-700 text-[0.95rem] leading-snug">
+      {issue.dek}
+    </p>
+    <p class="mt-2 font-sans text-xs text-ink-500">{issue.readingTime} min read</p>
+  </div>
+</article>

@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+---
+<footer class="mt-24 border-t border-ink-900/15 bg-paper-100">
+  <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-10 md:grid-cols-3">
+    <div class="md:col-span-1">
+      <p class="font-display text-2xl text-ink-900"><span class="italic">Field</span> Letter</p>
+      <p class="mt-2 font-sans text-sm text-ink-700">{site.tagline}</p>
+      <p class="mt-3 font-sans text-xs uppercase tracking-[0.24em] text-ink-500">{site.cadence}</p>
+    </div>
+
+    <nav aria-label="Footer" class="font-sans text-sm">
+      <h2 class="text-xs uppercase tracking-[0.22em] text-ink-700 mb-3">Explore</h2>
+      <ul class="space-y-1.5">
+        <li><a href="/" class="text-ink-800 hover:text-accent-700">Current issue</a></li>
+        <li><a href="/archive/" class="text-ink-800 hover:text-accent-700">Full archive</a></li>
+        <li><a href="/about/" class="text-ink-800 hover:text-accent-700">About the writer</a></li>
+        <li><a href="https://dcrader.dev" class="text-ink-800 hover:text-accent-700">Built by Donovan Crader →</a></li>
+      </ul>
+    </nav>
+
+    <section aria-labelledby="a11y-statement" class="font-sans text-sm text-ink-700">
+      <h2 id="a11y-statement" class="text-xs uppercase tracking-[0.22em] text-ink-700 mb-3">Accessibility</h2>
+      <p>
+        {site.business} is committed to keeping this site usable for everyone.
+        We aim for WCAG&nbsp;2.2&nbsp;AA throughout — semantic markup, keyboard access,
+        and AA color contrast in body text and links. If you hit a barrier, write to
+        <a href={`mailto:${site.accessibilityEmail}`} class="underline text-ink-900 hover:text-accent-700 break-words">{site.accessibilityEmail}</a>
+        and we will respond within five business days.
+      </p>
+      <p class="mt-3 text-ink-500">Last updated: {site.accessibilityUpdated}</p>
+    </section>
+  </div>
+
+  <div class="border-t border-ink-900/10">
+    <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 py-5 font-sans text-xs text-ink-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <p>© {new Date().getFullYear()} {site.business}. Words by {site.author}.</p>
+      <p>Cover photography licensed from Unsplash contributors.</p>
+    </div>
+  </div>
+</footer>

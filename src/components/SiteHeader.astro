@@ -1,0 +1,77 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  active?: 'home' | 'archive' | 'about';
+  /** When true, render the larger masthead used on the home page. */
+  masthead?: boolean;
+}
+const { active, masthead = false } = Astro.props;
+
+const nav = [
+  { label: 'Current issue', href: '/', key: 'home' as const },
+  { label: 'Archive', href: '/archive/', key: 'archive' as const },
+  { label: 'About', href: '/about/', key: 'about' as const },
+];
+---
+<header class="border-b border-ink-900/12 bg-paper-50">
+  {masthead ? (
+    <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-5 text-center">
+      <a href="/" class="inline-block group" aria-label={`${site.name} — home`}>
+        <h1 class="font-display text-5xl sm:text-6xl text-ink-900 tracking-tight">
+          <span class="italic">Field</span> Letter
+        </h1>
+      </a>
+      <p class="mt-3 font-sans text-xs uppercase tracking-[0.32em] text-ink-500">
+        Essays by {site.author} &nbsp;·&nbsp; Sunday mornings
+      </p>
+    </div>
+  ) : (
+    <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="/" class="inline-block group" aria-label={`${site.name} — home`}>
+        <span class="font-display text-2xl text-ink-900">
+          <span class="italic">Field</span> Letter
+        </span>
+      </a>
+      <nav aria-label="Primary" class="hidden sm:block">
+        <ul class="flex items-center gap-1 font-sans text-sm">
+          {nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'inline-block px-3 py-2 rounded text-ink-700 hover:text-accent-700 hover:bg-ink-900/[0.04] transition-colors',
+                  active === item.key && 'text-accent-700 font-medium',
+                ]}
+                aria-current={active === item.key ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  )}
+
+  {masthead && (
+    <nav aria-label="Primary" class="border-t border-ink-900/10">
+      <ul class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-center gap-2 sm:gap-6 font-sans text-sm">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'inline-block px-3 py-2 rounded text-ink-700 hover:text-accent-700 hover:bg-ink-900/[0.04] transition-colors',
+                active === item.key && 'text-accent-700 font-medium',
+              ]}
+              aria-current={active === item.key ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</header>

@@ -1,0 +1,137 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import SubscribeBlock from '../../components/SubscribeBlock.astro';
+import IssueCard from '../../components/IssueCard.astro';
+import { issues, issuesByDate } from '../../data/issues';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  return issues.map((issue) => ({
+    params: { slug: issue.slug },
+    props: { issue },
+  }));
+}
+
+const { issue } = Astro.props;
+
+const idx = issuesByDate.findIndex((i) => i.slug === issue.slug);
+const newer = idx > 0 ? issuesByDate[idx - 1] : null;
+const older = idx >= 0 && idx < issuesByDate.length - 1 ? issuesByDate[idx + 1] : null;
+const moreToRead = issuesByDate.filter((i) => i.slug !== issue.slug).slice(0, 3);
+
+// Preload the cover at a representative size to win LCP.
+const coverPreload = await getImage({
+  src: issue.cover,
+  format: 'avif',
+  width: 1400,
+});
+---
+<Base
+  title={issue.title}
+  description={issue.dek}
+  active="home"
+  preloadImage={coverPreload.src}
+>
+  <article class="pb-4">
+    <header class="max-w-essay mx-auto px-4 sm:px-6 pt-10 sm:pt-14 text-center">
+      <p class="font-sans text-xs uppercase tracking-[0.32em] text-ink-500">
+        Issue No. {issue.number} · {issue.section}
+      </p>
+      <h1 class="mt-4 font-display text-4xl sm:text-5xl text-ink-900 leading-[1.08] tracking-tight">
+        {issue.title}
+      </h1>
+      <p class="mt-5 font-serif text-xl text-ink-700 leading-snug">
+        {issue.dek}
+      </p>
+      <p class="mt-6 font-sans text-sm text-ink-500">
+        <span class="text-ink-700">By {site.author}</span>
+        <span class="px-2 text-ink-400" aria-hidden="true">·</span>
+        <time datetime={issue.date}>{issue.displayDate}</time>
+        <span class="px-2 text-ink-400" aria-hidden="true">·</span>
+        {issue.readingTime} min read
+      </p>
+    </header>
+
+    <figure class="max-w-essay mx-auto px-4 sm:px-6 mt-10">
+      <Picture
+        src={issue.cover}
+        alt={issue.coverAlt}
+        formats={['avif', 'webp']}
+        widths={[600, 1000, 1400, 1800]}
+        sizes="(min-width: 720px) 720px, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="w-full h-auto aspect-[3/2] object-cover rounded"
+      />
+      <figcaption class="mt-2 font-sans text-xs text-ink-500">
+        {issue.coverCredit}
+      </figcaption>
+    </figure>
+
+    <div class="essay-prose max-w-prose mx-auto px-4 sm:px-6 mt-12">
+      {issue.body.map((block) => {
+        if (block.type === 'p') {
+          return block.lede ? (
+            <p class="lede">{block.text}</p>
+          ) : (
+            <p>{block.text}</p>
+          );
+        }
+        if (block.type === 'h2') return <h2>{block.text}</h2>;
+        if (block.type === 'h3') return <h3>{block.text}</h3>;
+        if (block.type === 'quote') return <blockquote>{block.text}</blockquote>;
+        if (block.type === 'pull') return <p class="pullquote">{block.text}</p>;
+        if (block.type === 'rule') return <hr class="section" />;
+        return null;
+      })}
+
+      {issue.footnotes && issue.footnotes.length > 0 && (
+        <section class="footnotes" aria-labelledby="footnotes-heading">
+          <h2 id="footnotes-heading" class="font-sans text-xs uppercase tracking-[0.22em] text-ink-700 mb-3" style="font-family: Inter, sans-serif;">Notes</h2>
+          <ol>
+            {issue.footnotes.map((f) => (
+              <li id={`fn-${f.n}`}>
+                <span class="font-sans text-ink-500 mr-1">{f.n}.</span>
+                {f.text}
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+    </div>
+
+    <div class="max-w-essay mx-auto px-4 sm:px-6 mt-12">
+      <SubscribeBlock variant="inline" heading="If this is your sort of thing, get the next one." />
+    </div>
+
+    <nav aria-label="Issue navigation" class="max-w-essay mx-auto px-4 sm:px-6 mt-12 border-t border-ink-900/10 pt-8 grid gap-6 sm:grid-cols-2">
+      <div>
+        {older && (
+          <a href={`/issues/${older.slug}/`} class="block group">
+            <p class="font-sans text-xs uppercase tracking-[0.22em] text-ink-500">← Previous issue</p>
+            <p class="mt-1 font-display text-lg text-ink-900 group-hover:text-accent-700 transition-colors">{older.title}</p>
+          </a>
+        )}
+      </div>
+      <div class="sm:text-right">
+        {newer && (
+          <a href={`/issues/${newer.slug}/`} class="block group">
+            <p class="font-sans text-xs uppercase tracking-[0.22em] text-ink-500">Next issue →</p>
+            <p class="mt-1 font-display text-lg text-ink-900 group-hover:text-accent-700 transition-colors">{newer.title}</p>
+          </a>
+        )}
+      </div>
+    </nav>
+  </article>
+
+  <section class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+    <h2 class="font-display text-2xl sm:text-3xl text-ink-900 mb-8">More from the archive</h2>
+    <div class="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {moreToRead.map((i) => (
+        <IssueCard issue={i} />
+      ))}
+    </div>
+  </section>
+</Base>
