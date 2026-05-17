@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Accessibility Statement" description={`Accessibility statement for ${site.name}.`}>
+  <section class="max-w-essay mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-20">
+    <header>
+      <p class="font-sans text-xs uppercase tracking-[0.32em] text-ink-500">Policy</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl text-ink-900 tracking-tight">
+        Accessibility Statement
+      </h1>
+    </header>
+
+    <div class="essay-prose mt-10">
+      <p class="lede">
+        {site.business} is committed to ensuring digital accessibility for people with disabilities.
+        We are continually improving the user experience for everyone and applying the relevant
+        accessibility standards.
+      </p>
+
+      <h2>Conformance status</h2>
+      <p>
+        This site aims to conform to <strong>WCAG 2.1 Level AA</strong>. We design with semantic
+        markup, keyboard accessibility, accessible color contrast, and visible focus indicators.
+      </p>
+
+      <h2>Feedback</h2>
+      <p>
+        If you encounter an accessibility barrier on {site.name}, please contact us at
+        <a href={`mailto:${site.accessibilityEmail}`}>{site.accessibilityEmail}</a>.
+        We aim to respond within five business days.
+      </p>
+
+      <h2>Compatibility</h2>
+      <p>
+        {site.name} is designed to be compatible with recent versions of major browsers
+        (Chrome, Firefox, Safari, and Edge) and screen readers including VoiceOver, NVDA,
+        and JAWS.
+      </p>
+
+      <p><em>Last updated: {site.accessibilityUpdated}</em></p>
+    </div>
+  </section>
+</Base>
