@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="10" fill="#f7f4ed"/>
-  <text x="32" y="44" font-family="Playfair Display, Georgia, serif" font-size="38" font-style="italic" font-weight="600" text-anchor="middle" fill="#0d4f4a">F</text>
-  <circle cx="48" cy="44" r="2.6" fill="#a14a2a"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" shape-rendering="geometricPrecision">
+  <circle cx="256" cy="256" r="244" fill="none" stroke="#86EFAC" stroke-width="12" opacity="0.55"/>
+  <circle cx="256" cy="256" r="232" fill="#166534"/>
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, Inter, Helvetica, Arial, sans-serif" font-weight="700" font-size="230" fill="#F0FDF4" letter-spacing="-6">FL</text>
 </svg>
