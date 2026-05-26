@@ -1,0 +1,244 @@
+---
+import Base from '../layouts/Base.astro';
+import { author, site } from '../data/site';
+
+const pageTitle = 'Editorial philosophy';
+const pageDescription =
+  'How Field Letter is written, what it covers, what it refuses to do, and what readers should expect from the work in the months and years ahead.';
+---
+
+<Base title={pageTitle} description={pageDescription} active="editorial">
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-20">
+
+    <header>
+      <p class="font-sans text-xs uppercase tracking-[0.32em] text-ink-500">A standing note</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl text-ink-900 tracking-tight leading-[1.06]">
+        Editorial philosophy
+      </h1>
+      <p class="mt-5 font-serif text-lg sm:text-xl text-ink-700 leading-snug">
+        A page about how this newsletter is made — what it covers, what it
+        won't, and what readers can hold me to.
+      </p>
+    </header>
+
+    <hr class="my-10 border-ink-900/15" />
+
+    <div class="font-serif text-[1.08rem] text-ink-800 leading-[1.75] space-y-5">
+
+      <p class="first-letter:font-display first-letter:text-5xl first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:leading-[0.85]">
+        Most newsletters do not publish their editorial standards because they
+        do not have any. The cadence is whatever the writer can sustain, the
+        topic drifts with whatever has performed lately, and the only line
+        anyone is held to is the open-rate graph. I have been a reader of
+        newsletters for two decades and I have written this one for nearly five
+        years, and I have come around to the view that the writer owes the
+        reader something more declared than that.
+      </p>
+
+      <p>
+        This page is that declaration. It will be edited over time — practice
+        is a long argument with yourself — but the changes will be visible in
+        the version history, not slipped in quietly. If a policy here ever
+        contradicts something I do in an issue, the policy is the side I am
+        trying to be honest about, and you should call me on the difference.
+      </p>
+    </div>
+
+    <!-- THE THREE SUBJECTS -->
+    <section class="mt-12">
+      <h2 class="font-display text-2xl sm:text-3xl text-ink-900 tracking-tight">The three subjects</h2>
+      <div class="mt-5 font-serif text-[1.05rem] text-ink-800 leading-[1.75] space-y-5">
+        <p>
+          Field Letter is a weekly essay on three subjects, in rough rotation:
+          climate, cities, and technology. I picked them on purpose, and I have
+          worked inside two of the three. They are also the three subjects
+          where I think the public conversation is most reliably bad — too
+          dramatic on one end, too breezy on the other, and almost never
+          patient with the actual mechanics of how change happens at the
+          municipal scale.
+        </p>
+        <p>
+          <strong class="font-display text-ink-900">On climate.</strong> I am
+          not interested in the version of climate writing that is mostly
+          weather porn. The story I keep coming back to is the slow,
+          accreting version that shows up in actuarial tables, insurance
+          markets, and the line items of a public-works budget years before it
+          shows up in the news. That story is dull in the moment and
+          terrifying in aggregate, and almost nobody is writing it for a
+          general audience.
+        </p>
+        <p>
+          <strong class="font-display text-ink-900">On cities.</strong> The
+          only level of government most of us have meaningful leverage over.
+          I spent six years inside two of them, on the unglamorous end —
+          storm drains, zoning variances, transit-route reviews — and I came
+          out convinced that the average municipal decision is made by
+          fifteen people who have never been asked their opinion in public.
+          That is a problem with a fix.
+        </p>
+        <p>
+          <strong class="font-display text-ink-900">On technology.</strong> The
+          tone I aim for is the one a reasonable carpenter might take toward a
+          new power tool: interested, skeptical, and unwilling to install
+          something in the middle of every day on faith. I do not write
+          breathless coverage of model releases. I do write about what we
+          have collectively agreed to without ever having a conversation
+          about it, which is a longer list every year.
+        </p>
+      </div>
+    </section>
+
+    <hr class="my-12 border-ink-900/15" />
+
+    <!-- THE CADENCE -->
+    <section>
+      <h2 class="font-display text-2xl sm:text-3xl text-ink-900 tracking-tight">The cadence</h2>
+      <div class="mt-5 font-serif text-[1.05rem] text-ink-800 leading-[1.75] space-y-5">
+        <p>
+          One essay a week, Sunday morning, Pacific time. Between fifteen
+          hundred and three thousand words, occasionally longer when the
+          subject warrants it. Holiday weeks may slip to Monday. I have missed
+          three Sundays in five years and I will tell you which ones if you
+          ask.
+        </p>
+        <p>
+          I will not publish more often than weekly. The discipline of writing
+          one good piece, fully edited, is not the same discipline as
+          publishing daily. I think the second one ruins the first, and I
+          have watched it happen to writers I admire. If you came here for
+          frequency, this is not that newsletter, and I am happy to
+          recommend one.
+        </p>
+        <p>
+          I will not publish less often than weekly except in cases of family
+          or medical need. The contract with a Sunday reader is the only one
+          this newsletter has, and I take it seriously.
+        </p>
+      </div>
+    </section>
+
+    <hr class="my-12 border-ink-900/15" />
+
+    <!-- WHAT FIELD LETTER WILL NOT DO -->
+    <section>
+      <h2 class="font-display text-2xl sm:text-3xl text-ink-900 tracking-tight">What this newsletter will not do</h2>
+      <div class="mt-5 font-serif text-[1.05rem] text-ink-800 leading-[1.75] space-y-5">
+        <p>
+          A short, declared list. I read it before I send each issue.
+        </p>
+        <ul class="list-none pl-0 space-y-3 mt-4">
+          <li class="border-l-2 border-accent-700/40 pl-4">
+            <strong class="font-display text-ink-900">No advertising, no sponsorships, no affiliate links.</strong>
+            The economics of an essay change the second somebody else has paid
+            for it. If the work cannot support itself on reader contributions,
+            then it cannot support itself, and that is information.
+          </li>
+          <li class="border-l-2 border-accent-700/40 pl-4">
+            <strong class="font-display text-ink-900">No "ten things" headlines, ever.</strong>
+            The form is a confession that the writer either did not have a
+            real argument or did not trust the reader to follow one. Both are
+            insults.
+          </li>
+          <li class="border-l-2 border-accent-700/40 pl-4">
+            <strong class="font-display text-ink-900">No paywalls in the middle of an essay.</strong>
+            If a subscriber tier is added at some future date, free readers
+            will get the entire piece. Paid will get the back catalogue, the
+            audio version, and the privilege of being on the line for next
+            week's electric bill.
+          </li>
+          <li class="border-l-2 border-accent-700/40 pl-4">
+            <strong class="font-display text-ink-900">No AI-generated body copy.</strong>
+            I use spell-check, I use a search engine, and I sometimes ask a
+            model to find a missing word I'm circling. The argument and the
+            sentences are written by a person who can be held responsible for
+            them.
+          </li>
+          <li class="border-l-2 border-accent-700/40 pl-4">
+            <strong class="font-display text-ink-900">No subtweeting, no quote-tweet dunks, no engagement bait.</strong>
+            If a piece responds to somebody else, they are named and quoted in
+            context, and they get the right to reply. The rest is noise that
+            costs the writer their judgment.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="my-12 border-ink-900/15" />
+
+    <!-- CORRECTIONS POLICY -->
+    <section>
+      <h2 class="font-display text-2xl sm:text-3xl text-ink-900 tracking-tight">Corrections, sources, and the line on opinion</h2>
+      <div class="mt-5 font-serif text-[1.05rem] text-ink-800 leading-[1.75] space-y-5">
+        <p>
+          When I am wrong, the correction goes at the top of the piece, in
+          the same font as the body, dated, and signed. I do not edit a
+          paragraph silently and pretend the old one didn't exist. The web
+          version preserves the original text in a footnote so the reader can
+          see exactly what changed and when.
+        </p>
+        <p>
+          Sources are linked inline. When I cite a study, the link goes to
+          the study, not to the press release about the study. When I cite a
+          municipal document, the link goes to the document, not to the
+          city's blog post about the document. If a source is behind a
+          paywall, I'll say so and quote the relevant passage in the body.
+        </p>
+        <p>
+          The line between reporting and opinion: I do not pretend to be
+          neutral. Most of what I publish is argumentative essay, drawn from
+          public records and from people I've talked to on background. Where
+          I have done original reporting — a FOIA request, a sit-down
+          interview, a site visit — I will say so at the top of the piece.
+          Where I am working from second-hand sources, I will say that too.
+        </p>
+        <p>
+          If you are quoted in Field Letter and you believe you were
+          misrepresented, write to me. The first version of the correction
+          will be drafted with you on the email thread.
+        </p>
+      </div>
+    </section>
+
+    <hr class="my-12 border-ink-900/15" />
+
+    <!-- THE READER -->
+    <section>
+      <h2 class="font-display text-2xl sm:text-3xl text-ink-900 tracking-tight">The reader I write for</h2>
+      <div class="mt-5 font-serif text-[1.05rem] text-ink-800 leading-[1.75] space-y-5">
+        <p>
+          When I draft an issue, I am imagining one specific reader. She is
+          in her early forties, lives in a mid-sized American city, works in
+          something adjacent to public policy or design or local journalism,
+          and has about forty minutes on a Sunday morning between the coffee
+          and the rest of the day. She is patient with long sentences and
+          impatient with bad arguments. She does not need me to tell her
+          what to think; she needs me to give her something worth thinking
+          against.
+        </p>
+        <p>
+          If that's not you, you will probably still get something out of
+          most issues. If it's never you, this is not the right newsletter,
+          and the unsubscribe link works on the first try.
+        </p>
+      </div>
+    </section>
+
+    <!-- COLOPHON -->
+    <section class="mt-14 p-6 sm:p-8 bg-paper-100 border border-ink-900/10 rounded-sm" aria-labelledby="philosophy-colophon">
+      <h2 id="philosophy-colophon" class="font-display text-xl text-ink-900">A standing invitation</h2>
+      <p class="mt-3 font-serif text-ink-800 leading-relaxed">
+        Disagree with anything on this page in writing. The reply address on
+        every issue is the same address I read, and the smartest things I have
+        published have started as something a reader sent me on a Sunday
+        afternoon. The page above is what I aspire to. The work is what holds
+        me to it.
+      </p>
+      <p class="mt-4 font-sans text-sm text-ink-500">
+        — {author.name}, {author.city}. Last revised: this draft.
+      </p>
+    </section>
+
+  </article>
+</Base>
+</content>
+</invoke>

@@ -2,7 +2,7 @@
 import { site } from '../data/site';
 
 interface Props {
-  active?: 'home' | 'archive' | 'about';
+  active?: 'home' | 'archive' | 'editorial' | 'about';
   /** When true, render the larger masthead used on the home page. */
   masthead?: boolean;
 }
@@ -11,6 +11,7 @@ const { active, masthead = false } = Astro.props;
 const nav = [
   { label: 'Current issue', href: '/', key: 'home' as const },
   { label: 'Archive', href: '/archive/', key: 'archive' as const },
+  { label: 'Editorial', href: '/editorial/', key: 'editorial' as const },
   { label: 'About', href: '/about/', key: 'about' as const },
 ];
 ---
