@@ -28,31 +28,51 @@ const nav = [
       </p>
     </div>
   ) : (
-    <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <a href="/" class="inline-block group" aria-label={`${site.name} — home`}>
-        <span class="font-display text-2xl text-ink-900">
-          <span class="italic">Field</span> Letter
-        </span>
-      </a>
-      <nav aria-label="Primary" class="hidden sm:block">
-        <ul class="flex items-center gap-1 font-sans text-sm">
+    <>
+      <div class="max-w-wide mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-4">
+        <a href="/" class="inline-block group" aria-label={`${site.name} — home`}>
+          <span class="font-display text-xl sm:text-2xl text-ink-900">
+            <span class="italic">Field</span> Letter
+          </span>
+        </a>
+        <nav aria-label="Primary" class="hidden sm:block">
+          <ul class="flex items-center gap-1 font-sans text-sm">
+            {nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'inline-block px-3 py-2 rounded text-ink-700 hover:text-accent-700 hover:bg-ink-900/[0.04] transition-colors',
+                    active === item.key && 'text-accent-700 font-medium',
+                  ]}
+                  aria-current={active === item.key ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <nav aria-label="Primary" class="sm:hidden border-t border-ink-900/10">
+        <ul class="max-w-wide mx-auto px-2 h-11 flex items-center justify-around font-sans text-[0.8rem]">
           {nav.map((item) => (
             <li>
               <a
                 href={item.href}
                 class:list={[
-                  'inline-block px-3 py-2 rounded text-ink-700 hover:text-accent-700 hover:bg-ink-900/[0.04] transition-colors',
+                  'inline-block px-2 py-2 rounded text-ink-700 hover:text-accent-700 transition-colors whitespace-nowrap',
                   active === item.key && 'text-accent-700 font-medium',
                 ]}
                 aria-current={active === item.key ? 'page' : undefined}
               >
-                {item.label}
+                {item.label === 'Current issue' ? 'Current' : item.label}
               </a>
             </li>
           ))}
         </ul>
       </nav>
-    </div>
+    </>
   )}
 
   {masthead && (
